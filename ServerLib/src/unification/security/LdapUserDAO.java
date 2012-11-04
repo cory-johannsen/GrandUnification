@@ -80,6 +80,7 @@ public class LdapUserDAO implements UserDAO {
 
         try {
             LdapUser user = new LdapUser();
+            user.setUsername(username);
             if (givenNameAttr != null) {
                 user.setGivenName(givenNameAttr.get().toString());
             }
