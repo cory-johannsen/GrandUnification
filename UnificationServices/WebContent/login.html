@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Login</title>
+<link href="./unification.css" rel="stylesheet">
+<link href="./login.css" rel="stylesheet">
+
+<script src="./jquery-1.8.2.min.js"></script>
+<script src="./login.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<script type="text/javascript" src="commonheader.js"></script>
+		<script type="text/javascript" src="commonnav.js"></script>
+		<div id="content">
+		    <div id="message"></div>
+			<div id="form">
+				<div id="label">Username:</div> <!-- div label -->
+				<div class="controls">
+					<input type="text" name="username" id="username" /> <br>
+				</div><!-- div controls -->
+				
+				<div id="label">Password:</div> <!-- div label -->
+				<div class="controls">
+                    <input type="password" name="password" id="password" /> <br>
+                </div><!-- div controls -->
+
+				<div class="controls">
+					<input id="loginButton" type="button" value="Login"
+						class="loginButton" onclick="doPost()" /> 
+				</div><!-- div controls -->
+			</div>
+		    <script type="text/javascript" src="commonfooter.js"></script>
+	  </div><!-- div content -->
+	</div><!-- div class=wrapper -->
+</body>
+</html>
