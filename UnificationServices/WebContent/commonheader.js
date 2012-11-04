@@ -57,7 +57,7 @@ function storeUserToCookie(user) {
 /**
  * Update header when information is known
  */
-function personalizeHeader(fname, userId) {
+function personalizeHeader(fname) {
 	var htmlStr = fname
 			+ '<input id="logoutButton" type="button" value="Logout" onclick="logout()"/>';
 	$(".logout").html(htmlStr);
@@ -126,9 +126,7 @@ function validateSession() {
 		}
 	};
 
-	var requestData = {};
-	requestData.sessionId = cookieValue;
-	
+	var requestData = {};	
 	var jsonRequest = JSON.stringify(requestData);
 	
 	xhr.open("POST","service/session/validate",true);
@@ -178,13 +176,10 @@ function logout() {
 		}
 	};
 
-	var requestData = {};
-	requestData.sessionId = sessionId;
-	
+	var requestData = {};	
 	var jsonRequest = JSON.stringify(requestData);
 	
 	xhr.open("POST","service/logout",true);
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.send(jsonRequest);
-	window.location = "login.html";
 }

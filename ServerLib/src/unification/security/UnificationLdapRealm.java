@@ -33,17 +33,10 @@ import com.google.inject.Inject;
  */
 public class UnificationLdapRealm extends JndiLdapRealm {
 
-    private static final String ROLE_SEARCH_BASE_DN = "ou=roles,dc=unification";
+    private static final String ROLE_SEARCH_BASE_DN = "ou=roles,dc=unification,dc=org";
     private static final String USER_PREFIX = "uid=";
-    private static final String USER_SUFFIX = ",ou=users,dc=unification";
-    private static final String DEVICE_SUFFIX = ",ou=devices,dc=unification";
+    private static final String USER_SUFFIX = ",ou=users,dc=unification,dc=org";
     private static final String ROLE_PREFIX = "cn=";
-
-    private static final String GIVENNAME_ATTR_KEY = "givenname";
-    private static final String SURNAME_ATTR_KEY = "surname";
-    private static final String MAIL_ATTR_KEY = "mail";
-    private static final String CN_ATTR_KEY = "cn";
-    private static final String DISPLAYNAME_ATTR_KEY = "displayname";
 
     private final Logger mLogger;
 
@@ -54,7 +47,7 @@ public class UnificationLdapRealm extends JndiLdapRealm {
     public UnificationLdapRealm(Logger logger) {
         super();
         mLogger = logger;
-        setUserDnTemplate("uid={0},ou=users,dc=unification");
+        setUserDnTemplate("uid={0}" + USER_SUFFIX);
     }
 
     /*

@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 public class LdapUserDAO implements UserDAO {
     
     private static final String USER_PREFIX = "uid=";
-    private static final String USER_SUFFIX = ",ou=users,dc=vendscreen,dc=com";
+    private static final String USER_SUFFIX = ",ou=users,dc=unification,dc=org";
 
     private static final String GIVENNAME_ATTR_KEY = "givenname";
     private static final String SURNAME_ATTR_KEY = "sn";

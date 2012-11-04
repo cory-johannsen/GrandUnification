@@ -17,7 +17,7 @@ function doPost(api){
 	xhr.onloadend=function(){
 			var result = JSON.parse(xhr.responseText);
 			storeUserToCookie(result);
-			personalizeHeader(result.name, result,username);
+			personalizeHeader(result.user.displayName);
 			window.location = "index.html";
 	};
 	xhr.onreadystatechange=function(){//Needed to work on IE, throws errors for the rest
@@ -51,34 +51,3 @@ function doPost(api){
 	xhr.send(jsonRequest);
 
 }//end of doPost
-/***
- *
- ***/
-function jsonParser(tmpObj){
-	var rval = new String();
-	var keys = Object.keys(tmpObj);
-
-	for(var key = 0; key < keys.length; key++){
-		if(tmpObj.hasOwnProperty(keys[key])){//ensure property is in THIS object, not inherited
-
-			if(typeof tmpObj[keys[key]] === 'object'){
-				rval = rval + '<div class="object">' + keys[key] + " : " + jsonParser(tmpObj[keys[key]])+'</div>';
-			}
-			else{
-				if(key === 0){
-					rval = rval + '<div class="data">';
-				}
-
-				rval = rval + keys[key] + " : " + tmpObj[keys[key]];
-
-				if(key < keys.length - 1){
-					rval = rval + ', ';
-				}
-				else{
-					rval = rval + '</div>';
-				}
-			}
-		}
-	}
-	return(rval);
-}//end of jsonReviver

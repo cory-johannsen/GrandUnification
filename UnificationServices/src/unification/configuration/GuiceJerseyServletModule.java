@@ -42,6 +42,9 @@ import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
  * auto-publish and manage all service resources in the unification service
  * packages.
  * 
+ * This module filters all request through a GuiceShiroFilter to automatically 
+ * enforce Shiro security.
+ * 
  * @author cory.a.johannsen@gmail.com
  * 
  */

@@ -36,7 +36,7 @@ public class LoginResponse extends BaseResponse {
      * 
      */
     public LoginResponse(String error) {
-        this(error, null, 5 * 60 * 1000);
+        this(error, null, 0);
     }
     
     /**
@@ -82,7 +82,7 @@ public class LoginResponse extends BaseResponse {
      * @param timeoutInMillis the timeoutInMillis to set
      */
     @JsonProperty
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public void setTimeoutInMillis(long timeoutInMillis) {
         mTimeoutInMillis = timeoutInMillis;
     }
