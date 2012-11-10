@@ -48,6 +48,23 @@ title: Grand Unifier
 postalAddress: 123 Fake St
 initials: CAJ
 
+dn: uid=cbjohannsen,ou=users,dc=unification,dc=org
+objectClass: inetOrgPerson
+uid: cbjohannsen
+sn: Johannsen
+givenName: Chris
+cn: Chris Johannsen
+displayName: Chris Johannsen
+userPassword: password
+mail: chrisbjohannsen@gmail.com
+postalCode: 97206
+l: Portland
+o: Unification
+mobile: (xxx) xxx-xxxx
+homePhone: (xxx) xxx-xxx
+title: Grand Unifier
+postalAddress: 123 Fake St
+initials: CBJ
 
 #
 # roles
@@ -57,14 +74,17 @@ dn: cn=administrator,ou=roles,dc=unification,dc=org
 objectClass: groupOfUniqueNames
 cn: administrator
 uniqueMember: uid=cjohannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cbjohannsen,ou=users,dc=unification,dc=org
 
 dn: cn=developer,ou=roles,dc=unification,dc=org
 objectClass: groupOfUniqueNames
 cn: administrator
 uniqueMember: uid=cjohannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cbjohannsen,ou=users,dc=unification,dc=org
 
 dn: cn=user,ou=roles,dc=unification,dc=org
 objectClass: groupOfUniqueNames
 cn: user
 uniqueMember: uid=cjohannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cbjohannsen,ou=users,dc=unification,dc=org
 
