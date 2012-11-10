@@ -27,10 +27,12 @@ public class ServiceShiroConfigurationModule extends
     /* (non-Javadoc)
      * @see com.vendscreen.service.configuration.VendScreenShiroConfigurationModule#configureFilterChains()
      */
+    @SuppressWarnings("unchecked")
     @Override
     protected void configureFilterChains() {
         addFilterChain("/login.html", ANON);
         addFilterChain("/service/login", ANON);
+        addFilterChain("/service/session/validate", ANON);
         addFilterChain("/**", AUTHC_BASIC); // AUTHC_BASIC);
         addFilterChain("/service/**", AUTHC_BASIC); // AUTHC_BASIC);
     }
