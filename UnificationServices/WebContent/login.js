@@ -16,9 +16,10 @@ function doPost(api){
 	};
 	xhr.onloadend=function(){
 			var result = JSON.parse(xhr.responseText);
-			storeUserToCookie(result);
-			personalizeHeader(result.user.displayName);
-			window.location = "index.html";
+			mSessionValid = true;
+			mUser = result.user;
+			personalizeHeader(mUser);
+			
 	};
 	xhr.onreadystatechange=function(){//Needed to work on IE, throws errors for the rest
 		if(navigator.userAgent.indexOf("MSIE") > -1){

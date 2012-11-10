@@ -6,11 +6,28 @@ body{
 	height:2000px;
 	width:1000px;
 }
+#left{
+    width:200px;
+    height:600px;
+    padding-top:20px;
+    padding-bottom:20px;
+    float:left;
+	border-right-style:solid;
+	border-right-color:#f79021;
+	border-right-width:3px;
+}
 #content{
     height:600px;
     width:720px;
     padding:20px;
     float:left;
+}
+#message{
+ /*   float:left; */
+    width:100%;
+    height:40px;
+    overflow:auto;
+    background-color:white;
 }
 .header{
     height:75px;
@@ -38,24 +55,8 @@ body{
 	margin-right:5px;
 	color:#093e56;
 }
-.vend{
-	color:#f79021;
-}
-.screen{
-	color:#179cd8;
-}
 .inline{
 	display:inline;
-}
-#left{
-    width:200px;
-    height:600px;
-    padding-top:20px;
-    padding-bottom:20px;
-    float:left;
-	border-right-style:solid;
-	border-right-color:#f79021;
-	border-right-width:3px;
 }
 .controls{
     float:left;

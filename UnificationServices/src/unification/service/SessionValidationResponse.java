@@ -19,8 +19,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @XmlRootElement
 public class SessionValidationResponse extends BaseResponse {
     
-    public String mSessionId;
-
     /**
      * 
      */
