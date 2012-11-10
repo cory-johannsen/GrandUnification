@@ -89,6 +89,33 @@ function validateSession() {
 }
 
 /**
+ * @returns {Boolean}
+ */
+function loadUser() {
+	var xhr = createJsonConnection();
+	
+	xhr.onloadend=function(){
+		var result = JSON.parse(xhr.responseText);
+		if (result.error != null && result.error != "") {
+			$("#message").html(result.error);
+			mSessionValid = false;
+		}
+		else {
+			mUser = result.user;
+			personalizeHeader(mUser);
+		}
+	};
+
+	var requestData = {};	
+	var jsonRequest = JSON.stringify(requestData);
+	
+	xhr.open("POST","service/session/currentuser",true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.send(jsonRequest);
+}
+
+
+/**
  * 
  */
 function logout() {
@@ -116,6 +143,6 @@ document.write('<div id="logout" class="logout"></div>');
 document.write('<div id="pageTitle" class="title">The Grand Unification Framework</div>');
 document.write('</div><!-- header -->');
 validateSession();
-if (getCurrentUser() != null) {
-	personalizeHeader(mUser);
+if (isSessionValid()) {
+	loadUser();
 }
