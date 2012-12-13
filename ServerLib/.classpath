@@ -1,36 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="lib/aopalliance.jar"/>
-	<classpathentry kind="lib" path="lib/asm-3.1.jar"/>
-	<classpathentry kind="lib" path="lib/guice-3.0.jar"/>
-	<classpathentry kind="lib" path="lib/guice-assistedinject-3.0.jar"/>
-	<classpathentry kind="lib" path="lib/guice-jndi-3.0.jar"/>
-	<classpathentry kind="lib" path="lib/guice-persist-3.0.jar"/>
-	<classpathentry kind="lib" path="lib/guice-servlet-3.0.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-jaxrs-1.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-xc-1.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/javax.inject.jar"/>
-	<classpathentry kind="lib" path="lib/jersey-core-1.14.jar"/>
-	<classpathentry kind="lib" path="lib/jersey-guice-1.14.jar"/>
-	<classpathentry kind="lib" path="lib/jersey-json-1.14.jar"/>
-	<classpathentry kind="lib" path="lib/jersey-multipart-1.14.jar"/>
-	<classpathentry kind="lib" path="lib/jersey-server-1.14.jar"/>
-	<classpathentry kind="lib" path="lib/jersey-servlet-1.14.jar"/>
-	<classpathentry kind="lib" path="lib/jsr311-api-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.0.8-bin.jar"/>
-	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.3.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/guava-13.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/guice-multibindings-3.0.jar"/>
-	<classpathentry kind="lib" path="lib/shiro-all-1.2.1.jar" sourcepath="/home/cjohannsen/lib/shiro-root-1.2.1/core/src/main/java"/>
-	<classpathentry kind="lib" path="lib/shiro-guice-1.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-simple-1.7.2.jar"/>
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
