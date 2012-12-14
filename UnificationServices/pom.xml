@@ -1,10 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>unification.services</groupId>
+  <parent>
+        <groupId>unification</groupId>
+        <artifactId>grand-unification</artifactId>
+        <version>1-SNAPSHOT</version>
+  </parent>
   <artifactId>unification-services</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>Grand Unification Services</name>
+  <name>Grand Unification Services Web</name>
   <build>
     <sourceDirectory>${project.basedir}/src</sourceDirectory>
     <plugins>
@@ -16,7 +20,21 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <warSourceDirectory>${project.basedir}/WebContent</warSourceDirectory>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-
+  <dependencies>
+    <dependency>
+      <groupId>unification</groupId>
+      <artifactId>unification-serverlib</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
 </project>
