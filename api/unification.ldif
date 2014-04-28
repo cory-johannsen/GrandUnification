@@ -30,9 +30,9 @@ ou: roles
 # users
 #
 
-dn: uid=cjohannsen,ou=users,dc=unification,dc=org
+dn: uid=cory.johannsen,ou=users,dc=unification,dc=org
 objectClass: inetOrgPerson
-uid: cjohannsen
+uid: cory.johannsen
 sn: Johannsen
 givenName: Cory
 cn: Cory Johannsen
@@ -48,9 +48,9 @@ title: Grand Unifier
 postalAddress: 123 Fake St
 initials: CAJ
 
-dn: uid=cbjohannsen,ou=users,dc=unification,dc=org
+dn: uid=chris.johannsen,ou=users,dc=unification,dc=org
 objectClass: inetOrgPerson
-uid: cbjohannsen
+uid: chris.johannsen
 sn: Johannsen
 givenName: Chris
 cn: Chris Johannsen
