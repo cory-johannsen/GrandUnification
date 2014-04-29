@@ -8,19 +8,19 @@ package unification.configuration;
 import javax.servlet.ServletContext;
 
 /**
- * VendScreenWebShiroConfigurationModule
+ * ShiroConfigurationModule
  * TODO: type description 
  *
- * @author cory.johannsen@vendscreen.com
+ * @author cory.a.johannsen@gmail.com
  *
  */
-public class ServiceShiroConfigurationModule extends
+public class GuiceShiroConfigurationModule extends
         ShiroConfigurationModule {
 
     /**
      * @param servletContext
      */
-    public ServiceShiroConfigurationModule(ServletContext servletContext) {
+    public GuiceShiroConfigurationModule(ServletContext servletContext) {
         super(servletContext);
     }
 
@@ -30,11 +30,8 @@ public class ServiceShiroConfigurationModule extends
     @SuppressWarnings("unchecked")
     @Override
     protected void configureFilterChains() {
-        addFilterChain("/login.html", ANON);
-        addFilterChain("/service/login", ANON);
-        addFilterChain("/service/session/validate", ANON);
+        addFilterChain("/status", ANON);
         addFilterChain("/**", AUTHC_BASIC); // AUTHC_BASIC);
-        addFilterChain("/service/**", AUTHC_BASIC); // AUTHC_BASIC);
     }
 
 }

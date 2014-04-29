@@ -7,10 +7,7 @@ package unification.service;
 
 import java.util.logging.Logger;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.shiro.SecurityUtils;
@@ -23,7 +20,7 @@ import com.google.inject.Inject;
  * @author cory.a.johannsen@gmail.com
  * 
  */
-@Path("/service/session/validate")
+@Path("/{api_version}/session/validate")
 public class SessionValidationResource {
 
     private final Logger mLogger;
@@ -38,7 +35,7 @@ public class SessionValidationResource {
 
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @POST
+    @GET
     public SessionValidationResponse validate() {
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return new SessionValidationResponse(null);

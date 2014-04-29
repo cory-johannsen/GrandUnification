@@ -9,7 +9,7 @@ package unification.security;
  * UserDAO
  * Data access object interface for User instances 
  *
- * @author cory.johannsen@vendscreen.com
+ * @author cory.a.johannsen@gmail.com
  *
  */
 public interface UserDAO {

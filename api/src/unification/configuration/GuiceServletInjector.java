@@ -17,7 +17,7 @@ import com.google.inject.servlet.GuiceServletContextListener;
 /**
  * GuiceServletConfiguration TODO: type description
  * 
- * @author cory.johannsen@vendscreen.com
+ * @author cory.a.johannsen@gmail.com
  * 
  */
 public class GuiceServletInjector extends GuiceServletContextListener {
@@ -31,7 +31,7 @@ public class GuiceServletInjector extends GuiceServletContextListener {
      */
     @Override
     protected Injector getInjector() {
-        return Guice.createInjector(new ServiceShiroConfigurationModule(
+        return Guice.createInjector(new GuiceShiroConfigurationModule(
                 mServletContext), new ShiroAopModule(),
                 new GuiceJerseyServletModule());
     }

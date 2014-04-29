@@ -16,8 +16,6 @@ import javax.sql.DataSource;
 import org.apache.shiro.guice.web.GuiceShiroFilter;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 
-import unification.connection.ManagedConnection;
-import unification.connection.ManagedConnectionInterceptor;
 import unification.service.ObjectMapperProvider;
 
 
@@ -61,15 +59,6 @@ public class GuiceJerseyServletModule extends JerseyServletModule {
         bind(DataSource.class).toProvider(
                 JndiIntegration.fromJndi(DataSource.class,
                         "java:comp/env/jdbc/unification"));
-
-
-        // Install a connection managing method interceptor to support
-        // automatic connection lifecycle control
-        ManagedConnectionInterceptor managedConnectionInterceptor = new ManagedConnectionInterceptor();
-        requestInjection(managedConnectionInterceptor);
-        bindInterceptor(any(), annotatedWith(ManagedConnection.class),
-                managedConnectionInterceptor);
-        bind(Connection.class).toProvider(managedConnectionInterceptor);
 
         // Bind an ObjectMapper provider to support seamless Jasper JSON serialization/deserialization
         bind(ObjectMapperProvider.class).asEagerSingleton();

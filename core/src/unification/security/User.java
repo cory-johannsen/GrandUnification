@@ -10,7 +10,7 @@ package unification.security;
  * Represents the core information related to a system user, such as 
  * name and email address
  * 
- * @author cory.johannsen@vendscreen.com
+ * @author cory.a.johannsen@gmail.com
  * 
  */
 public interface User {
