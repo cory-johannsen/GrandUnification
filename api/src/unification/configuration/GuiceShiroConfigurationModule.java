@@ -25,13 +25,13 @@ public class GuiceShiroConfigurationModule extends
     }
 
     /* (non-Javadoc)
-     * @see com.vendscreen.service.configuration.VendScreenShiroConfigurationModule#configureFilterChains()
+     * @see unification.configuration.GuiceShiroConfigurationModule#configureFilterChains()
      */
     @SuppressWarnings("unchecked")
     @Override
     protected void configureFilterChains() {
-        addFilterChain("/status", ANON);
-        addFilterChain("/**", AUTHC_BASIC); // AUTHC_BASIC);
+        addFilterChain("/1.0/status", ANON);
+        addFilterChain("/1.0/**", AUTHC_BASIC);
     }
 
 }

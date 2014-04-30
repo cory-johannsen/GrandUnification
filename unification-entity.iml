@@ -6,6 +6,9 @@
         <webroots>
           <root url="file://$MODULE_DIR$/entity/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/entity/src" />
+        </sourceRoots>
       </configuration>
     </facet>
     <facet type="jpa" name="JPA">
@@ -22,7 +25,8 @@
     <output-test url="file://$MODULE_DIR$/entity/target/test-classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/entity">
-      <sourceFolder url="file://$MODULE_DIR$/entity/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/entity/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/entity/src/main/resources" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/entity/target" />
     </content>
     <orderEntry type="inheritedJdk" />

@@ -1,7 +1,7 @@
 package unification.service;
 
 import com.google.inject.Inject;
-import main.java.unification.entity.ServerStatus;
+import unification.entity.ServerStatus;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -1,4 +1,4 @@
-package main.java.unification.entity;
+package unification.entity;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 

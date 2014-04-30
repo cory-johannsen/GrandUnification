@@ -62,7 +62,7 @@ public abstract class ShiroConfigurationModule extends ShiroWebModule {
         // Bind and expose an authorization cache manager
         bind(CacheManager.class).to(MemoryConstrainedCacheManager.class);  
         expose(CacheManager.class);
-        // Bind and expose the VendScreenLdapRealm implementation
+        // Bind and expose the UnificationLdapRealm implementation
         bind(UnificationLdapRealm.class);
         expose(UnificationLdapRealm.class);
         // Bind the JndiLdapRealm as the security realm for Shiro
