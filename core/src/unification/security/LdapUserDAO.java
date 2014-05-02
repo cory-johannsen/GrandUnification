@@ -1,75 +1,66 @@
 /**
  * LdapUserDAO.java
- * 
- * Created Nov 3, 2012 at 10:27:00 PM by cory.a.johannsen@gmail.com
+ *
+ * Created Oct 29, 2012 at 9:41:18 AM by cory.johannsen@vendscreen.com
  */
 package unification.security;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.google.inject.Inject;
+import org.apache.shiro.realm.ldap.LdapContextFactory;
 
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.ldap.LdapContext;
 
-import org.apache.shiro.realm.ldap.LdapContextFactory;
-
-import com.google.inject.Inject;
+import unification.configuration.Log;
 
 /**
- * LdapUserDAO 
- * Concrete implementation of UserDAO that constructs and populates user information 
- * from an LDAP repository.  
- * 
+ * LdapUserDAO TODO: type description
+ *
  * @author cory.a.johannsen@gmail.com
- * 
  */
 public class LdapUserDAO implements UserDAO {
-    
-    private static final String USER_PREFIX = "uid=";
-    private static final String USER_SUFFIX = ",ou=users,dc=unification,dc=org";
 
+    private static final String USER_PREFIX = "uid=";
+    private static final String USER_SUFFIX = ",ou=users,dc=vsm2m,dc=net";
     private static final String GIVENNAME_ATTR_KEY = "givenname";
     private static final String SURNAME_ATTR_KEY = "sn";
     private static final String MAIL_ATTR_KEY = "mail";
     private static final String CN_ATTR_KEY = "cn";
     private static final String DISPLAYNAME_ATTR_KEY = "displayname";
-
-    private final Logger mLogger;
     private final LdapContextFactory mContextFactory;
+    @Log
+    org.slf4j.Logger mLogger;
 
     /**
-     * 
+     *
      */
     @Inject
-    public LdapUserDAO(Logger logger, LdapContextFactory contextFactory) {
-        mLogger = logger;
+    public LdapUserDAO(LdapContextFactory contextFactory) {
         mContextFactory = contextFactory;
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.vendscreen.service.security.UserDAO#loadUser(java.lang.String)
+     * @see UserDAO#loadUser(java.lang.String)
      */
     public User loadUser(String username) throws UserNotFoundException,
             UserDAOException {
-        mLogger.log(Level.INFO, "Querying for extended user info for "
+        mLogger.info("Querying for extended user info for "
                 + username);
         LdapContext ldapContext = null;
         try {
             ldapContext = mContextFactory.getSystemLdapContext();
-        }
-        catch (NamingException ex) {
+        } catch (NamingException ex) {
             throw new UserDAOException(ex);
         }
         Attributes attributes = null;
         try {
             attributes = ldapContext.getAttributes(USER_PREFIX
                     + username + USER_SUFFIX);
-        }
-        catch (NamingException ex) {
+        } catch (NamingException ex) {
             throw new UserNotFoundException(username + " not found.");
         }
         Attribute givenNameAttr = attributes.get(GIVENNAME_ATTR_KEY);
@@ -80,7 +71,6 @@ public class LdapUserDAO implements UserDAO {
 
         try {
             LdapUser user = new LdapUser();
-            user.setUsername(username);
             if (givenNameAttr != null) {
                 user.setGivenName(givenNameAttr.get().toString());
             }
@@ -96,9 +86,9 @@ public class LdapUserDAO implements UserDAO {
             if (displayNameAttr != null) {
                 user.setDisplayName(displayNameAttr.get().toString());
             }
+            user.setUsername(username);
             return user;
-        }
-        catch (NamingException ex) {
+        } catch (NamingException ex) {
             throw new UserDAOException(ex);
         }
     }

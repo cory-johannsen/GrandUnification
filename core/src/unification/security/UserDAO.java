@@ -17,8 +17,8 @@ public interface UserDAO {
     /**
      * UserDAOException
      * Base exception type for all UserDAO related errors.
-     * 
-     * @author cjohannsen
+     *
+     * @author cory.a.johannsen@gmail.com
      *
      */
     public class UserDAOException extends Exception {

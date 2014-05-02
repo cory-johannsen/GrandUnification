@@ -1,21 +1,19 @@
 /**
  * LdapAuthenticationInfo.java
- * 
- * Created Nov 3, 2012 at 10:27:00 PM by cory.a.johannsen@gmail.com
+ *
+ * Created Oct 26, 2012 at 12:57:02 PM by cory.johannsen@vendscreen.com
  */
 package unification.security;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
- * LdapAuthenticationInfo 
- * Concrete implementation of User that is configured for JSON serialization
- * 
+ * LdapAuthenticationInfo TODO: type description
+ *
  * @author cory.a.johannsen@gmail.com
- * 
  */
 @XmlRootElement
 public class LdapUser implements User {
@@ -27,17 +25,17 @@ public class LdapUser implements User {
     protected String mDisplayName;
 
     /**
-     * 
+     *
      */
     public LdapUser() {
         this(null, null, null, null, null, null);
     }
 
     /**
-     * 
+     *
      */
     public LdapUser(String username, String givenName, String surname,
-            String email, String commonName, String displayName) {
+                    String email, String commonName, String displayName) {
         mUsername = username;
         mGivenName = givenName;
         mSurname = surname;
@@ -68,8 +66,7 @@ public class LdapUser implements User {
     }
 
     /**
-     * @param givenName
-     *            the givenName to set
+     * @param givenName the givenName to set
      */
     @Override
     public void setGivenName(String givenName) {
@@ -87,8 +84,7 @@ public class LdapUser implements User {
     }
 
     /**
-     * @param surname
-     *            the surname to set
+     * @param surname the surname to set
      */
     @Override
     public void setSurname(String surname) {
@@ -106,8 +102,7 @@ public class LdapUser implements User {
     }
 
     /**
-     * @param email
-     *            the email to set
+     * @param email the email to set
      */
     @Override
     public void setEmail(String email) {
@@ -125,8 +120,7 @@ public class LdapUser implements User {
     }
 
     /**
-     * @param commonName
-     *            the commonName to set
+     * @param commonName the commonName to set
      */
     @Override
     public void setCommonName(String commonName) {
@@ -144,8 +138,7 @@ public class LdapUser implements User {
     }
 
     /**
-     * @param displayName
-     *            the displayName to set
+     * @param displayName the displayName to set
      */
     @Override
     public void setDisplayName(String displayName) {

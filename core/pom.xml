@@ -14,7 +14,6 @@
 
     <build>
         <sourceDirectory>${project.basedir}/src</sourceDirectory>
-        <scriptSourceDirectory>${project.basedir}/src/scripts</scriptSourceDirectory>
         <resources>
             <resource>
                 <directory>${project.basedir}/src</directory>
@@ -76,6 +75,14 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
         </dependency>
     </dependencies>
 </project>
