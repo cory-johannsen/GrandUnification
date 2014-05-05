@@ -60,11 +60,17 @@ public abstract class JpaDataAccessObject<K,E> implements DataAccessObject<K,E> 
     public abstract List<E> loadByParameters(Map parameters)  throws EntityNotFoundException, DaoException;
 
     public E create(E e) throws DaoException {
-
+        entityManagerProvider.get().persist(e);
+        return e;
     }
 
-    public abstract E store(E e) throws DaoException;
+    public E store(E e) throws DaoException {
+        return entityManagerProvider.get().merge(e);
+    }
 
-    public E remove(E e) throws DaoException;
+    public E remove(E e) throws DaoException {
+        entityManagerProvider.get().remove(e);
+        return e;
+    }
 
 }
