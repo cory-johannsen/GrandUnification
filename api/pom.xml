@@ -3,11 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>unification</groupId>
-        <artifactId>grand-unification</artifactId>
+        <artifactId>unification-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>unification-api</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <name>unification-api</name>
 
     <packaging>jar</packaging>
