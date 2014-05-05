@@ -82,6 +82,10 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
         //Bind SLF4J Logging listener
         bindListener(Matchers.any(), new SLF4JTypeListener());
 
+        bindApplicationInterfaces();
+
+        bindApplicationExceptionMappers();
+
         // Bind an ObjectMapper provider to support seamless Jasper JSON serialization/deserialization
         bind(ObjectMapperProvider.class).asEagerSingleton();
 
@@ -115,7 +119,17 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
     }
 
     /**
-     * Subclass should implement this method to append application-specific parameters
+     *
+     */
+    protected abstract void bindApplicationInterfaces();
+
+    /**
+     *
+     */
+    protected abstract void bindApplicationExceptionMappers();
+
+    /**
+     * Subclasses should implement this method to append application-specific parameters
      * to the passed-in map.  These parameters will be used to configure the application.
      * @param parameters
      * @return
