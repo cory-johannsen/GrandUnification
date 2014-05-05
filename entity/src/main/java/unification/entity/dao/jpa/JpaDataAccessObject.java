@@ -1,8 +1,8 @@
 package unification.entity.dao.jpa;
 
-import main.java.unification.entity.dao.DataAccessObject;
-import main.java.unification.entity.dao.exception.DaoException;
-import main.java.unification.entity.dao.exception.EntityNotFoundException;
+import unification.entity.dao.DataAccessObject;
+import unification.entity.dao.exception.DaoException;
+import unification.entity.dao.exception.EntityNotFoundException;
 import unification.configuration.Log;
 
 import javax.inject.Inject;

@@ -1,4 +1,4 @@
-package main.java.unification.entity.dao.exception;
+package unification.entity.dao.exception;
 
 /**
  * User: cjohannsen

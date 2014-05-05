@@ -1,7 +1,7 @@
-package main.java.unification.entity.dao;
+package unification.entity.dao;
 
-import main.java.unification.entity.dao.exception.DaoException;
-import main.java.unification.entity.dao.exception.EntityNotFoundException;
+import unification.entity.dao.exception.DaoException;
+import unification.entity.dao.exception.EntityNotFoundException;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
