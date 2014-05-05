@@ -1,42 +1,32 @@
 /**
  * VendScreenAPIServletModule.java
- * 
+ *
  * Created Nov 3, 2012 at 10:27:00 PM by cory.a.johannsen@gmail.com
  */
 package unification.configuration;
 
-import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-
 import com.google.inject.Provides;
+import com.google.inject.Scopes;
+import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.persist.PersistFilter;
 import com.google.inject.persist.jpa.JpaPersistModule;
-import org.apache.shiro.guice.web.GuiceShiroFilter;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
-
-import unification.service.ObjectMapperProvider;
-
-
-import static com.google.inject.matcher.Matchers.annotatedWith;
-import static com.google.inject.matcher.Matchers.any;
-
-import com.google.inject.Scopes;
-import com.google.inject.Singleton;
-import com.google.inject.jndi.JndiIntegration;
 import com.sun.jersey.api.core.PackagesResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
+import org.apache.shiro.guice.web.GuiceShiroFilter;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import unification.service.ObjectMapperProvider;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * GrandUnificationModule
@@ -46,12 +36,11 @@ import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
  * Jackson-JSON serialization engine. The system is then configured to
  * auto-publish and manage all service resources in the unification service
  * packages.
- * 
- * This module filters all request through a GuiceShiroFilter to automatically 
+ * <p/>
+ * This module filters all request through a GuiceShiroFilter to automatically
  * enforce Shiro security.
- * 
+ *
  * @author cory.a.johannsen@gmail.com
- * 
  */
 public abstract class GrandUnificationModule extends JerseyServletModule {
 
@@ -84,9 +73,9 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
         System.out.println("Using JDBC password " + jpaPassword);
         System.out.println("Using JPA persistence unit " + jpaPersistenceUnit);
 
-        install(new JpaPersistModule("jpaPersistenceUnit").properties(jpaProperties));
+        install(new JpaPersistModule(jpaPersistenceUnit).properties(jpaProperties));
         filter("/*").through(PersistFilter.class);
-        
+
         // Bind the InitialContext implementation class to the Context interface using singleton semantics
         bind(Context.class).to(InitialContext.class).in(Singleton.class);
 
@@ -118,7 +107,6 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
     }
 
 
-
     @Provides
     @Singleton
     javax.validation.Validator provideValidator() {
@@ -126,5 +114,11 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
         return factory.getValidator();
     }
 
+    /**
+     * Subclass should implement this method to append application-specific parameters
+     * to the passed-in map.  These parameters will be used to configure the application.
+     * @param parameters
+     * @return
+     */
     protected abstract Map<String, String> configureApplicationParameters(Map<String, String> parameters);
 }
