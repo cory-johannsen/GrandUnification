@@ -57,6 +57,7 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
     protected void configureServlets() {
         super.configureServlets();
         filter("/*").through(GuiceShiroFilter.class);
+
         // Load the persistence module properties from the environment
         Properties jpaProperties = new Properties();
         String jpaDialect = System.getProperty(JPA_HIBERNATE_DIALECT);
@@ -72,6 +73,13 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
         System.out.println("Using JDBC user " + jpaUser);
         System.out.println("Using JDBC password " + jpaPassword);
         System.out.println("Using JPA persistence unit " + jpaPersistenceUnit);
+
+        jpaProperties.put(JPA_HIBERNATE_DIALECT, jpaDialect);
+        jpaProperties.put(JPA_JDBC_DRIVER, jpaDriver);
+        jpaProperties.put(JPA_JDBC_URL, jpaUrl);
+        jpaProperties.put(JPA_JDBC_USER, jpaUser);
+        jpaProperties.put(JPA_JDBC_PASSWORD, jpaPassword);
+
 
         install(new JpaPersistModule(jpaPersistenceUnit).properties(jpaProperties));
         filter("/*").through(PersistFilter.class);

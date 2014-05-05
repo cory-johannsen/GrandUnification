@@ -49,12 +49,16 @@ public abstract class JpaDataAccessObject<K,E> implements DataAccessObject<K,E> 
     public List<E> loadAll()  throws EntityNotFoundException, DaoException {
         TypedQuery<E> query = entityManagerProvider.get().createQuery("SELECT e FROM " + entityClass.getName() + " e",
                 entityClass);
+        List<E> resultList = null;
         try {
-            List<E> resultList = query.getResultList();
-            return resultList;
+            resultList = query.getResultList();
         } catch (NoResultException ex) {
             throw new EntityNotFoundException("No " + entityClass.getName() + " found");
         }
+        if (resultList == null || resultList.isEmpty()) {
+            throw new EntityNotFoundException("No " + entityClass.getName() + " found");
+        }
+        return resultList;
     }
 
     public abstract List<E> loadByParameters(Map parameters)  throws EntityNotFoundException, DaoException;
