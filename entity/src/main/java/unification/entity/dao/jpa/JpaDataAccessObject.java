@@ -1,4 +1,4 @@
-package main.java.unification.entity.dao.jpa;
+package unification.entity.dao.jpa;
 
 import main.java.unification.entity.dao.DataAccessObject;
 import main.java.unification.entity.dao.exception.DaoException;
