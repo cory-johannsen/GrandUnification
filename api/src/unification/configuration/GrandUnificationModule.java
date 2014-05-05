@@ -32,7 +32,7 @@ import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
 /**
- * GuiceJerseyServletModule 
+ * GrandUnificationModule
  * Extension of JerseyServletModule that configures the system
  * with Guice dependency injection.  This includes binding
  * the JDBC datasource, connection manager and lifecycle interceptor, and
@@ -46,7 +46,7 @@ import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
  * @author cory.a.johannsen@gmail.com
  * 
  */
-public class GuiceJerseyServletModule extends JerseyServletModule {
+public abstract class GrandUnificationModule extends JerseyServletModule {
 
     @Override
     protected void configureServlets() {
@@ -55,10 +55,6 @@ public class GuiceJerseyServletModule extends JerseyServletModule {
         
         // Bind the InitialContext implementation class to the Context interface using singleton semantics
         bind(Context.class).to(InitialContext.class).in(Singleton.class);
-        // Bind the "jdbc/unification" JNDI resource to the DataSource interface
-        bind(DataSource.class).toProvider(
-                JndiIntegration.fromJndi(DataSource.class,
-                        "java:comp/env/jdbc/unification"));
 
         // Bind an ObjectMapper provider to support seamless Jasper JSON serialization/deserialization
         bind(ObjectMapperProvider.class).asEagerSingleton();
@@ -81,4 +77,6 @@ public class GuiceJerseyServletModule extends JerseyServletModule {
 
         serve("/*").with(GuiceContainer.class, parameters);
     }
+
+    protected abstract void configureApplicationResources();
 }

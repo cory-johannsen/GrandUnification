@@ -20,7 +20,7 @@ import com.google.inject.servlet.GuiceServletContextListener;
  * @author cory.a.johannsen@gmail.com
  * 
  */
-public class GuiceServletInjector extends GuiceServletContextListener {
+public abstract class GuiceServletInjector extends GuiceServletContextListener {
 
     private ServletContext mServletContext;
 
@@ -33,7 +33,7 @@ public class GuiceServletInjector extends GuiceServletContextListener {
     protected Injector getInjector() {
         return Guice.createInjector(new GuiceShiroConfigurationModule(
                 mServletContext), new ShiroAopModule(),
-                new GuiceJerseyServletModule());
+                createApplicationModule());
     }
 
     @Override
@@ -41,4 +41,6 @@ public class GuiceServletInjector extends GuiceServletContextListener {
         mServletContext = servletContextEvent.getServletContext();
         super.contextInitialized(servletContextEvent);
     }
+
+    protected abstract GrandUnificationModule createApplicationModule();
 }
