@@ -17,11 +17,13 @@
 
     <distributionManagement>
         <repository>
+            <uniqueVersion>false</uniqueVersion>
             <id>deployment</id>
             <name>Unification Repository</name>
             <url>http://ec2-54-187-82-151.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
+            <uniqueVersion>true</uniqueVersion>
             <id>deployment</id>
             <name>Unification Repository</name>
             <url>http://ec2-54-187-82-151.us-west-2.compute.amazonaws.com:8081/nexus/content/repositories/snapshots</url>
