@@ -45,10 +45,13 @@ import java.util.Properties;
  */
 public abstract class GrandUnificationModule extends JerseyServletModule {
 
+    // API Version
+    public static final String API_VERSION = "API_VERSION";
+
     // LDAP Properties
-    private static final String LDAP_URL = "LDAP_URL";
-    private static final String LDAP_ADMIN_DN = "LDAP_ADMIN_DN";
-    private static final String LDAP_ADMIN_PW = "LDAP_ADMIN_PW";
+    public static final String LDAP_URL = "LDAP_URL";
+    public static final String LDAP_ADMIN_DN = "LDAP_ADMIN_DN";
+    public static final String LDAP_ADMIN_PW = "LDAP_ADMIN_PW";
 
     // JPA properties
     public static final String JPA_HIBERNATE_DIALECT = "hibernate.dialect";
@@ -154,5 +157,10 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
      */
     protected abstract Map<String, String> configureApplicationParameters(Map<String, String> parameters);
 
+    /**
+     *
+     * @param properties
+     * @return
+     */
     protected abstract Properties bindApplicationNamedProperties(Properties properties);
 }

@@ -22,7 +22,7 @@ import com.google.inject.servlet.GuiceServletContextListener;
  */
 public abstract class GuiceServletInjector extends GuiceServletContextListener {
 
-    private ServletContext mServletContext;
+    private ServletContext servletContext;
 
     /*
      * (non-Javadoc)
@@ -31,16 +31,17 @@ public abstract class GuiceServletInjector extends GuiceServletContextListener {
      */
     @Override
     protected Injector getInjector() {
-        return Guice.createInjector(new GuiceShiroConfigurationModule(
-                mServletContext), new ShiroAopModule(),
+        return Guice.createInjector(createShiroConfigurationModule(servletContext), new ShiroAopModule(),
                 createApplicationModule());
     }
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        mServletContext = servletContextEvent.getServletContext();
+        servletContext = servletContextEvent.getServletContext();
         super.contextInitialized(servletContextEvent);
     }
 
     protected abstract GrandUnificationModule createApplicationModule();
+
+    protected abstract LDAPShiroConfigurationModule createShiroConfigurationModule(ServletContext context);
 }

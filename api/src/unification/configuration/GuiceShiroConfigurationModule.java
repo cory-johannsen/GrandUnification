@@ -5,6 +5,10 @@
  */
 package unification.configuration;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import org.slf4j.Logger;
+
 import javax.servlet.ServletContext;
 
 /**
@@ -15,7 +19,10 @@ import javax.servlet.ServletContext;
  *
  */
 public class GuiceShiroConfigurationModule extends
-        ShiroConfigurationModule {
+        LDAPShiroConfigurationModule {
+
+    @Inject
+    @Named("API_VERSION") public String apiVersion;
 
     /**
      * @param servletContext
@@ -30,8 +37,8 @@ public class GuiceShiroConfigurationModule extends
     @SuppressWarnings("unchecked")
     @Override
     protected void configureFilterChains() {
-        addFilterChain("/1.0/status", ANON);
-        addFilterChain("/**", AUTHC_BASIC);
+        addFilterChain("/" + apiVersion + "/status", ANON);
+        addFilterChain("/" + apiVersion + "*", AUTHC_BASIC);
     }
 
 }
