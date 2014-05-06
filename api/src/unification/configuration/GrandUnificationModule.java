@@ -9,6 +9,7 @@ import com.google.inject.Provides;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
+import com.google.inject.name.Names;
 import com.google.inject.persist.PersistFilter;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.sun.jersey.api.core.PackagesResourceConfig;
@@ -44,6 +45,10 @@ import java.util.Properties;
  */
 public abstract class GrandUnificationModule extends JerseyServletModule {
 
+    // LDAP Properties
+    private static final String LDAP_URL = "LDAP_URL";
+    private static final String LDAP_ADMIN_DN = "LDAP_ADMIN_DN";
+    private static final String LDAP_ADMIN_PW = "LDAP_ADMIN_PW";
 
     // JPA properties
     public static final String JPA_HIBERNATE_DIALECT = "hibernate.dialect";
@@ -115,6 +120,11 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
 
         parameters = configureApplicationParameters(parameters);
 
+        Properties properties = new Properties();
+        bindApplicationNamedProperties(properties);
+
+        Names.bindProperties(binder(), properties);
+
         serve("/*").with(GuiceContainer.class, parameters);
     }
 
@@ -143,4 +153,6 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
      * @return
      */
     protected abstract Map<String, String> configureApplicationParameters(Map<String, String> parameters);
+
+    protected abstract Properties bindApplicationNamedProperties(Properties properties);
 }

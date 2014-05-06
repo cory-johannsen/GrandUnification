@@ -31,7 +31,7 @@ public class GuiceShiroConfigurationModule extends
     @Override
     protected void configureFilterChains() {
         addFilterChain("/1.0/status", ANON);
-        addFilterChain("/1.0/**", AUTHC_BASIC);
+        addFilterChain("/**", AUTHC_BASIC);
     }
 
 }

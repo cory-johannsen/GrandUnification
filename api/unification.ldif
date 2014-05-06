@@ -73,18 +73,18 @@ initials: CBJ
 dn: cn=administrator,ou=roles,dc=unification,dc=org
 objectClass: groupOfUniqueNames
 cn: administrator
-uniqueMember: uid=cjohannsen,ou=users,dc=unification,dc=org
-uniqueMember: uid=cbjohannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cory.johannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=chris.johannsen,ou=users,dc=unification,dc=org
 
 dn: cn=developer,ou=roles,dc=unification,dc=org
 objectClass: groupOfUniqueNames
 cn: administrator
-uniqueMember: uid=cjohannsen,ou=users,dc=unification,dc=org
-uniqueMember: uid=cbjohannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cory.johannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=chris.johannsen,ou=users,dc=unification,dc=org
 
 dn: cn=user,ou=roles,dc=unification,dc=org
 objectClass: groupOfUniqueNames
 cn: user
-uniqueMember: uid=cjohannsen,ou=users,dc=unification,dc=org
-uniqueMember: uid=cbjohannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cory.johannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=chris.johannsen,ou=users,dc=unification,dc=org
 
