@@ -15,9 +15,7 @@ import org.apache.shiro.guice.web.ShiroWebModule;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.ldap.JndiLdapContextFactory;
 import org.apache.shiro.realm.ldap.LdapContextFactory;
-import unification.security.LdapUserDAO;
-import unification.security.UnificationLdapRealm;
-import unification.security.UserDAO;
+import unification.security.*;
 
 import javax.servlet.ServletContext;
 
@@ -48,6 +46,7 @@ public abstract class LDAPShiroConfigurationModule extends ShiroWebModule {
             @Named("LDAP_URL") String ldapUrl,
             @Named("LDAP_ADMIN_DN") String adminDN,
             @Named("LDAP_ADMIN_PW") String adminPW) {
+        System.out.println("LDAPShiroConfigurationModule.provideContextFactory invoked.");
         final JndiLdapContextFactory contextFactory = new JndiLdapContextFactory();
         contextFactory.setUrl(ldapUrl);
         contextFactory.setSystemUsername(adminDN);
@@ -59,7 +58,9 @@ public abstract class LDAPShiroConfigurationModule extends ShiroWebModule {
     @Singleton
     @Inject
     public UnificationLdapRealm provideUserLdapRealm(
-            LdapContextFactory contextFactory, CacheManager cacheManager) {
+            LdapContextFactory contextFactory, CacheManager cacheManager,
+            HashedCredentialsMatcher matcher) {
+        System.out.println("LDAPShiroConfigurationModule.provideUserLdapRealm invoked.");
         UnificationLdapRealm realm = new UnificationLdapRealm();
         realm.setContextFactory(contextFactory);
         realm.setCacheManager(cacheManager);
@@ -68,13 +69,32 @@ public abstract class LDAPShiroConfigurationModule extends ShiroWebModule {
         return realm;
     }
 
+
+    @Provides
+    @Singleton
+    @Inject
+    public AuthenticatingRealm provideSharedSecretRealm(CacheManager cacheManger,
+                                                        SharedSecretAuthenticatingRealm realm, HashedCredentialsMatcher matcher) {
+        System.out.println("LDAPShiroConfigurationModule.provideAuthenticatingRealm invoked.");
+        realm.setCachingEnabled(true);
+        realm.setCacheManager(cacheManger);
+        realm.setAuthenticationTokenClass(SharedSecretAuthenticationToken.class);
+        matcher.setHashAlgorithmName(HASH_ALGORITHM);
+        matcher.setHashIterations(HASH_ITERATIONS);
+
+        realm.setCredentialsMatcher(matcher);
+        return realm;
+    }
+
     protected void configureShiroWeb() {
+        System.out.println("LDAPShiroConfigurationModule.configureShiroWeb invoked.");
         // Bind and expose an authorization cache manager
         bind(CacheManager.class).to(MemoryConstrainedCacheManager.class);
         expose(CacheManager.class);
 
         // Bind the Realms
         bindRealm().to(UnificationLdapRealm.class);
+        bindRealm().to(SharedSecretAuthenticatingRealm.class);
 
         // Bind and expose the UserDAO
         bind(UserDAO.class).to(LdapUserDAO.class);

@@ -5,8 +5,6 @@
  */
 package unification.security;
 
-import java.util.logging.Level;
-
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
@@ -36,9 +34,9 @@ import unification.configuration.Log;
  */
 public class UnificationLdapRealm extends JndiLdapRealm {
 
-    private static final String ROLE_SEARCH_BASE_DN = "ou=roles,dc=unification,dc=org";
     private static final String USER_PREFIX = "uid=";
     private static final String USER_SUFFIX = ",ou=users,dc=unification,dc=org";
+    private static final String ROLE_SEARCH_BASE_DN = "ou=roles,dc=unification,dc=org";
     private static final String ROLE_PREFIX = "cn=";
 
     @Log
@@ -67,7 +65,7 @@ public class UnificationLdapRealm extends JndiLdapRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         while (searchResults.hasMore()) {
             SearchResult searchResult = searchResults.next();
-            //logger.info("found search result " + searchResult);
+            logger.info("found search result " + searchResult);
             String name = searchResult.getName();
             if (name.startsWith(ROLE_PREFIX)) {
                 name = name.substring(ROLE_PREFIX.length());
@@ -88,7 +86,10 @@ public class UnificationLdapRealm extends JndiLdapRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
             throws AuthenticationException {
-        return super.doGetAuthenticationInfo(token);
+        logger.info("Authenticating " + token);
+        AuthenticationInfo authcInfo = super.doGetAuthenticationInfo(token);
+        logger.info("AuthenticationInfo: " + authcInfo);
+        return authcInfo;
     }
 
     /*

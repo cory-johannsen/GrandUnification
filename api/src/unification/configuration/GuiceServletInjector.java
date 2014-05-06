@@ -31,12 +31,14 @@ public abstract class GuiceServletInjector extends GuiceServletContextListener {
      */
     @Override
     protected Injector getInjector() {
+        System.out.println("GuiceServletInjector.getInjector invoked.");
         return Guice.createInjector(createShiroConfigurationModule(servletContext), new ShiroAopModule(),
                 createApplicationModule());
     }
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        System.out.println("GuiceServletInjector.contextInitialized invoked.");
         servletContext = servletContextEvent.getServletContext();
         super.contextInitialized(servletContextEvent);
     }
