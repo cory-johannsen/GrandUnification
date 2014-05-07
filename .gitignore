@@ -39,4 +39,5 @@ Icon
 .Trashes
 
 # IntelliJ cruft
+.idea/
 *.iml
