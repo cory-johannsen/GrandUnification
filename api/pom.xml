@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>unification</groupId>
+        <groupId>javaunification.org</groupId>
         <artifactId>unification-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -45,12 +45,12 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>unification</groupId>
+            <groupId>javaunification.org</groupId>
             <artifactId>unification-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>unification</groupId>
+            <groupId>javaunification.org</groupId>
             <artifactId>unification-entity</artifactId>
             <version>${project.version}</version>
         </dependency>
