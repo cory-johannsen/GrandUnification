@@ -6,6 +6,7 @@ package unification.security;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.slf4j.Logger;
 import unification.configuration.Log;
 
 import javax.servlet.ServletRequest;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author chrisbjohannsen@gmail.com Creates an Authentication token that
  *         can be consumed by one of the Authentication Realms. A
- *         VendScreenSharedSecretAuthenticationToken will be created if the
+ *         SharedSecretAuthenticationToken will be created if the
  *         request includes the custom http header named "x-unification-timestamp",
  *         otherwise a standard UsernamePasswordAuthenticationToken will be
  *         created.
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 public class SharedSecretAuthenticatingFilter extends BasicHttpAuthenticationFilter {
 
     @Log
-    org.slf4j.Logger mLogger;
+    Logger logger;
 
     /*
      * (non-Javadoc)
@@ -51,16 +52,14 @@ public class SharedSecretAuthenticatingFilter extends BasicHttpAuthenticationFil
             return createToken("", "", request, response);
         }
 
-        mLogger
-                .info(String
-                        .format(
-                                "Login Attempt Request Headers:: Host: %s | Method: %s | Resource: %s | Timestamp value: %s | AuthorizationHeader: %s",
-                                host, method, resource, requestDate, authorizationHeader));
+        logger.info(String.format(
+                "Login Attempt Request Headers:: Host: %s | Method: %s | Resource: %s | Timestamp value: %s | AuthorizationHeader: %s",
+                host, method, resource, requestDate, authorizationHeader));
 
         String[] prinCred = getPrincipalsAndCredentials(authorizationHeader, request);
 
         // We want to return the default UsernamePasswordToken if the
-        // x-vsm2m-timestamp header was not included
+        // x-unification-timestamp header was not included
         if (prinCred == null || prinCred.length < 2 || requestDate == null) {
             // Create an authentication token with an empty password,
             // since one hasn't been provided in the request.
@@ -69,10 +68,10 @@ public class SharedSecretAuthenticatingFilter extends BasicHttpAuthenticationFil
             return createToken(username, password, request, response);
         }
 
-        String deviceSerial = prinCred[0];
+        String clientId = prinCred[0];
         char[] signature = prinCred[1].toCharArray();
 
         return new SharedSecretAuthenticationToken(host, method, resource, requestDate,
-                deviceSerial, signature);
+                clientId, signature);
     }
 }

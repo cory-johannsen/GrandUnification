@@ -12,6 +12,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
 import unification.configuration.Log;
 
 /**
@@ -24,7 +25,7 @@ public class SharedSecretAuthenticatingRealm extends AuthenticatingRealm {
 
     private final int HASH_ITERATIONS = 1000;
     @Log
-    org.slf4j.Logger mLogger;
+    Logger logger;
 
     /**
      * DI constructor
@@ -49,12 +50,12 @@ public class SharedSecretAuthenticatingRealm extends AuthenticatingRealm {
 
             String hashTarget = String.format("%s%s%s", token.getHttpMethod(), token.getResourceName(), token.getRequestDate());
 
-            mLogger.info(String.format("Hash Target: %s", hashTarget));
+            logger.info(String.format("Hash Target: %s", hashTarget));
 
             String digestString =
                     new Sha256Hash(hashTarget, salt, HASH_ITERATIONS).toBase64();
 
-            mLogger.info(String.format("Calculated Digest: %s", digestString));
+            logger.info(String.format("Calculated Digest: %s", digestString));
 
             SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(serial, digestString.toCharArray(), ByteSource.Util.bytes(salt), getName());
 

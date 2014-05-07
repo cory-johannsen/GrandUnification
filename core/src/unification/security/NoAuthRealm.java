@@ -34,7 +34,7 @@ public class NoAuthRealm extends SimpleAccountRealm {
     @Override
     public boolean accountExists(String username) {
         if (!super.accountExists(username)) {
-            addAccount(username, "vendscreen", "administrator", "device", "user");
+            addAccount(username, "unification", "administrator", "user");
         }
         return true;
     }

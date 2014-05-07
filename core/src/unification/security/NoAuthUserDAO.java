@@ -40,7 +40,7 @@ public class NoAuthUserDAO implements UserDAO {
         user.setGivenName(username);
         user.setSurname(username);
         user.setCommonName(username);
-        user.setEmail(username + "@vendscreen.com");
+        user.setEmail(username + "@javaunification.com");
         user.setDisplayName(username);
         user.setUsername(username);
         return user;

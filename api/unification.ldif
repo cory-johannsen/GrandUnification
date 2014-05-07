@@ -1,5 +1,5 @@
 # Create top-level object in domain
-dn: dc=unification,dc=org
+dn: dc=javaunification,dc=org
 objectClass: top
 objectClass: dcObject
 objectclass: organization
@@ -7,7 +7,7 @@ o: Unification Organization
 description: Top-level organizational definitions for Unification
 
 # Admin user.
-dn: cn=admin,dc=unification,dc=org
+dn: cn=admin,dc=javaunification,dc=org
 objectClass: simpleSecurityObject
 objectClass: organizationalRole
 cn: admin
@@ -18,11 +18,11 @@ userPassword: unification
 # Top-Level Organizational Units
 #
 
-dn: ou=users,dc=unification,dc=org
+dn: ou=users,dc=javaunification,dc=org
 objectClass: organizationalUnit
 ou: users
 
-dn: ou=roles,dc=unification,dc=org
+dn: ou=roles,dc=javaunification,dc=org
 objectClass: organizationalUnit
 ou: roles
 
@@ -30,7 +30,7 @@ ou: roles
 # users
 #
 
-dn: uid=cory.johannsen,ou=users,dc=unification,dc=org
+dn: uid=cory.johannsen,ou=users,dc=javaunification,dc=org
 objectClass: inetOrgPerson
 uid: cory.johannsen
 sn: Johannsen
@@ -48,7 +48,7 @@ title: Grand Unifier
 postalAddress: 123 Fake St
 initials: CAJ
 
-dn: uid=chris.johannsen,ou=users,dc=unification,dc=org
+dn: uid=chris.johannsen,ou=users,dc=javaunification,dc=org
 objectClass: inetOrgPerson
 uid: chris.johannsen
 sn: Johannsen
@@ -70,21 +70,21 @@ initials: CBJ
 # roles
 #
 
-dn: cn=administrator,ou=roles,dc=unification,dc=org
+dn: cn=administrator,ou=roles,dc=javaunification,dc=org
 objectClass: groupOfUniqueNames
 cn: administrator
-uniqueMember: uid=cory.johannsen,ou=users,dc=unification,dc=org
-uniqueMember: uid=chris.johannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cory.johannsen,ou=users,dc=javaunification,dc=org
+uniqueMember: uid=chris.johannsen,ou=users,dc=javaunification,dc=org
 
-dn: cn=developer,ou=roles,dc=unification,dc=org
+dn: cn=developer,ou=roles,dc=javaunification,dc=org
 objectClass: groupOfUniqueNames
 cn: administrator
-uniqueMember: uid=cory.johannsen,ou=users,dc=unification,dc=org
-uniqueMember: uid=chris.johannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cory.johannsen,ou=users,dc=javaunification,dc=org
+uniqueMember: uid=chris.johannsen,ou=users,dc=javaunification,dc=org
 
-dn: cn=user,ou=roles,dc=unification,dc=org
+dn: cn=user,ou=roles,dc=javaunification,dc=org
 objectClass: groupOfUniqueNames
 cn: user
-uniqueMember: uid=cory.johannsen,ou=users,dc=unification,dc=org
-uniqueMember: uid=chris.johannsen,ou=users,dc=unification,dc=org
+uniqueMember: uid=cory.johannsen,ou=users,dc=javaunification,dc=org
+uniqueMember: uid=chris.johannsen,ou=users,dc=javaunification,dc=org
 

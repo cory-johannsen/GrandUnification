@@ -22,6 +22,7 @@ import org.apache.shiro.realm.ldap.LdapContextFactory;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.google.inject.Inject;
+import org.slf4j.Logger;
 import unification.configuration.Log;
 
 /**
@@ -35,12 +36,12 @@ import unification.configuration.Log;
 public class UnificationLdapRealm extends JndiLdapRealm {
 
     private static final String USER_PREFIX = "uid=";
-    private static final String USER_SUFFIX = ",ou=users,dc=unification,dc=org";
-    private static final String ROLE_SEARCH_BASE_DN = "ou=roles,dc=unification,dc=org";
+    private static final String USER_SUFFIX = ",ou=users,dc=javaunification,dc=org";
+    private static final String ROLE_SEARCH_BASE_DN = "ou=roles,dc=javaunification,dc=org";
     private static final String ROLE_PREFIX = "cn=";
 
     @Log
-    org.slf4j.Logger logger;
+    Logger logger;
 
     /**
      * Default no-arg constructor
@@ -86,9 +87,9 @@ public class UnificationLdapRealm extends JndiLdapRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
             throws AuthenticationException {
-        logger.info("Authenticating " + token);
+        System.out.println("Token: " + token);
         AuthenticationInfo authcInfo = super.doGetAuthenticationInfo(token);
-        logger.info("AuthenticationInfo: " + authcInfo);
+        System.out.println("AuthenticationInfo: " + authcInfo);
         return authcInfo;
     }
 

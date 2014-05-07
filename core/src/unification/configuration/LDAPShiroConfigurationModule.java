@@ -66,6 +66,7 @@ public abstract class LDAPShiroConfigurationModule extends ShiroWebModule {
         realm.setCacheManager(cacheManager);
         realm.setAuthenticationTokenClass(UsernamePasswordToken.class);
         realm.setCachingEnabled(true);
+        realm.setCredentialsMatcher(matcher);
         return realm;
     }
 
@@ -74,7 +75,8 @@ public abstract class LDAPShiroConfigurationModule extends ShiroWebModule {
     @Singleton
     @Inject
     public AuthenticatingRealm provideSharedSecretRealm(CacheManager cacheManger,
-                                                        SharedSecretAuthenticatingRealm realm, HashedCredentialsMatcher matcher) {
+                                                        SharedSecretAuthenticatingRealm realm,
+                                                        HashedCredentialsMatcher matcher) {
         System.out.println("LDAPShiroConfigurationModule.provideAuthenticatingRealm invoked.");
         realm.setCachingEnabled(true);
         realm.setCacheManager(cacheManger);
@@ -94,7 +96,7 @@ public abstract class LDAPShiroConfigurationModule extends ShiroWebModule {
 
         // Bind the Realms
         bindRealm().to(UnificationLdapRealm.class);
-        bindRealm().to(SharedSecretAuthenticatingRealm.class);
+        //bindRealm().to(SharedSecretAuthenticatingRealm.class);
 
         // Bind and expose the UserDAO
         bind(UserDAO.class).to(LdapUserDAO.class);

@@ -23,7 +23,7 @@ import unification.configuration.Log;
 public class LdapUserDAO implements UserDAO {
 
     private static final String USER_PREFIX = "uid=";
-    private static final String USER_SUFFIX = ",ou=users,dc=vsm2m,dc=net";
+    private static final String USER_SUFFIX = ",ou=users,dc=javaunification,dc=org";
     private static final String GIVENNAME_ATTR_KEY = "givenname";
     private static final String SURNAME_ATTR_KEY = "sn";
     private static final String MAIL_ATTR_KEY = "mail";
