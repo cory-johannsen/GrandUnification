@@ -65,8 +65,10 @@ public abstract class LDAPShiroConfigurationModule extends ShiroWebModule {
         realm.setContextFactory(contextFactory);
         realm.setCacheManager(cacheManager);
         realm.setAuthenticationTokenClass(UsernamePasswordToken.class);
+        matcher.setHashAlgorithmName(HASH_ALGORITHM);
         realm.setCachingEnabled(true);
         realm.setCredentialsMatcher(matcher);
+
         return realm;
     }
 

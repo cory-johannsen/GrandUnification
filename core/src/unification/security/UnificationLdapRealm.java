@@ -11,6 +11,7 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.SearchResult;
+import javax.naming.ldap.LdapContext;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -19,6 +20,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.ldap.JndiLdapRealm;
 import org.apache.shiro.realm.ldap.LdapContextFactory;
+import org.apache.shiro.realm.ldap.LdapUtils;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.google.inject.Inject;
@@ -75,6 +77,32 @@ public class UnificationLdapRealm extends JndiLdapRealm {
         }
         searchResults.close();
         return authorizationInfo;
+    }
+
+    protected AuthenticationInfo queryForAuthenticationInfo(AuthenticationToken token,
+                                                            LdapContextFactory ldapContextFactory)
+            throws NamingException {
+
+        Object principal = token.getPrincipal();
+        Object credentials = token.getCredentials();
+
+        //logger.debug("Authenticating user '{}' through LDAP", principal);
+
+        principal = getLdapPrincipal(token);
+
+        LdapContext ctx = null;
+        try {
+            ctx = ldapContextFactory.getLdapContext(principal, credentials);
+            //context was opened successfully, which means their credentials were valid.  Return the AuthenticationInfo:
+            return createAuthenticationInfo(token, principal, credentials, ctx);
+        }
+        catch (Exception ex) {
+            //logger.debug("Caught exception: ", ex);
+            throw ex;
+        }
+        finally {
+            LdapUtils.closeContext(ctx);
+        }
     }
 
     /*
