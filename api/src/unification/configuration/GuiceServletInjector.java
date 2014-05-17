@@ -13,6 +13,7 @@ import org.apache.shiro.guice.aop.ShiroAopModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
+import org.apache.shiro.guice.web.ShiroWebModule;
 
 /**
  * GuiceServletConfiguration TODO: type description
@@ -45,5 +46,5 @@ public abstract class GuiceServletInjector extends GuiceServletContextListener {
 
     protected abstract GrandUnificationModule createApplicationModule();
 
-    protected abstract LDAPShiroConfigurationModule createShiroConfigurationModule(ServletContext context);
+    protected abstract ShiroWebModule createShiroConfigurationModule(ServletContext context);
 }

@@ -5,7 +5,17 @@
  */
 package unification.security;
 
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAccount;
 import org.apache.shiro.realm.SimpleAccountRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 /**
  * NoAuthRealm
@@ -39,5 +49,8 @@ public class NoAuthRealm extends SimpleAccountRealm {
         return true;
     }
 
-
+    @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        return new SimpleAccount(token.getPrincipal(), token.getCredentials(), "javaunification.org");
+    }
 }
