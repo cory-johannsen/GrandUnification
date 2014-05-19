@@ -20,10 +20,9 @@ import unification.security.*;
 import javax.servlet.ServletContext;
 
 /**
- * VendScreenAPIConfigurationModule GUICE/Shiro configuration module for the
- * VendScreenAPI. Binds JDBC connection injector, LDAP context factory injector,
- * JNDI LDAP security realm, VendScreen domain objects and DAOs, Connection
- * management interceptor, and Shiro security filters.
+ * LDAPConfigurationModule - GUICE/Shiro configuration module for the
+ * API. Binds JDBC connection injector, LDAP context factory injector,
+ * JNDI LDAP security realm and Shiro security filters.
  *
  * @author cory.a.johannsen@gmail.com
  */

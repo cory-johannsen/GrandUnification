@@ -1,5 +1,6 @@
 package unification.entity.dao.jpa;
 
+import com.google.inject.persist.Transactional;
 import unification.entity.dao.DataAccessObject;
 import unification.entity.dao.exception.DaoException;
 import unification.entity.dao.exception.EntityNotFoundException;
@@ -11,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +36,23 @@ public abstract class JpaDataAccessObject<K,E> implements DataAccessObject<K,E> 
     @Inject
     public JpaDataAccessObject(Provider<EntityManager> entityManagerProvider) {
         this.entityManagerProvider = entityManagerProvider;
-        ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-        this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];
+        Class previousSuperclass = getClass();
+        Class superClass = getClass().getSuperclass();
+        Type superclassType = getClass().getGenericSuperclass();
+        ParameterizedType genericSuperclassType = null;
+        while (genericSuperclassType == null) {
+            try {
+                genericSuperclassType = (ParameterizedType) superclassType;
+            } catch (ClassCastException e) {
+                superclassType = superClass.getGenericSuperclass();
+                previousSuperclass = superClass;
+                superClass = superClass.getSuperclass();
+            }
+            if (superClass == previousSuperclass) {
+                throw new IllegalArgumentException("ERROR: Class " + getClass().getName() + " is not a proper subclass of " + JpaDataAccessObject.class.getName());
+            }
+        }
+        this.entityClass = (Class<E>) genericSuperclassType.getActualTypeArguments()[1];
     }
 
     public E loadById(K id) throws EntityNotFoundException, DaoException {
@@ -63,15 +80,18 @@ public abstract class JpaDataAccessObject<K,E> implements DataAccessObject<K,E> 
 
     public abstract List<E> loadByParameters(Map parameters)  throws EntityNotFoundException, DaoException;
 
+    @Transactional
     public E create(E e) throws DaoException {
         entityManagerProvider.get().persist(e);
         return e;
     }
 
+    @Transactional
     public E store(E e) throws DaoException {
         return entityManagerProvider.get().merge(e);
     }
 
+    @Transactional
     public E remove(E e) throws DaoException {
         entityManagerProvider.get().remove(e);
         return e;

@@ -9,6 +9,8 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAccount;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.SimpleAccountRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
@@ -51,6 +53,14 @@ public class NoAuthRealm extends SimpleAccountRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        return new SimpleAccount(token.getPrincipal(), token.getCredentials(), "javaunification.org");
+        AuthenticationInfo info = new SimpleAccount(token.getPrincipal(), token.getCredentials(), "javaunification.org");
+        System.out.println("NoAuthRealm: User " + info.getPrincipals().getPrimaryPrincipal() + " has been authenticated.");
+        return info;
+    }
+
+    @Override
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        AuthorizationInfo info = new SimpleAuthorizationInfo(toSet("developer", ","));
+        return info;
     }
 }
