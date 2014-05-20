@@ -14,6 +14,8 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import org.apache.shiro.guice.web.ShiroWebModule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * GuiceServletConfiguration TODO: type description
@@ -22,7 +24,7 @@ import org.apache.shiro.guice.web.ShiroWebModule;
  * 
  */
 public abstract class GuiceServletInjector extends GuiceServletContextListener {
-
+    private static final Logger log = LoggerFactory.getLogger(GuiceServletInjector.class);
     private ServletContext servletContext;
 
     /*
@@ -32,14 +34,14 @@ public abstract class GuiceServletInjector extends GuiceServletContextListener {
      */
     @Override
     protected Injector getInjector() {
-        System.out.println("GuiceServletInjector.getInjector invoked.");
+        log.trace("getInjector invoked.");
         return Guice.createInjector(createShiroConfigurationModule(servletContext), new ShiroAopModule(),
                 createApplicationModule());
     }
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        System.out.println("GuiceServletInjector.contextInitialized invoked.");
+        log.trace("contextInitialized invoked.");
         servletContext = servletContextEvent.getServletContext();
         super.contextInitialized(servletContextEvent);
     }

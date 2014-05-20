@@ -19,6 +19,8 @@ import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 import org.apache.shiro.guice.web.GuiceShiroFilter;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import unification.service.ObjectMapperProvider;
 
 import javax.naming.Context;
@@ -44,7 +46,8 @@ import java.util.Properties;
  * @author cory.a.johannsen@gmail.com
  */
 public abstract class GrandUnificationModule extends JerseyServletModule {
-
+    private static final Logger log = LoggerFactory.getLogger(GrandUnificationModule.class);
+    
     // API Version
     public static final String API_VERSION = "API_VERSION";
 
@@ -75,12 +78,12 @@ public abstract class GrandUnificationModule extends JerseyServletModule {
         String jpaPassword = System.getProperty(JPA_JDBC_PASSWORD);
         String jpaPersistenceUnit = System.getProperty(JPA_PERSISTENCE_UNIT);
 
-        System.out.println("Using hibernate dialect " + jpaDialect);
-        System.out.println("Using JDBC driver " + jpaDriver);
-        System.out.println("Using JDBC URL " + jpaUrl);
-        System.out.println("Using JDBC user " + jpaUser);
-        System.out.println("Using JDBC password " + jpaPassword);
-        System.out.println("Using JPA persistence unit " + jpaPersistenceUnit);
+        log.debug("Using hibernate dialect " + jpaDialect);
+        log.debug("Using JDBC driver " + jpaDriver);
+        log.debug("Using JDBC URL " + jpaUrl);
+        log.debug("Using JDBC user " + jpaUser);
+        log.debug("Using JDBC password " + jpaPassword);
+        log.debug("Using JPA persistence unit " + jpaPersistenceUnit);
 
         jpaProperties.put(JPA_HIBERNATE_DIALECT, jpaDialect);
         jpaProperties.put(JPA_JDBC_DRIVER, jpaDriver);

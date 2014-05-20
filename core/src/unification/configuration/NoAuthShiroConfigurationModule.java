@@ -15,6 +15,8 @@ import org.apache.shiro.guice.web.ShiroWebModule;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.realm.ldap.JndiLdapContextFactory;
 import org.apache.shiro.realm.ldap.LdapContextFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import unification.security.*;
 
 import javax.servlet.ServletContext;
@@ -25,6 +27,7 @@ import javax.servlet.ServletContext;
  * @author cory.a.johannsen@gmail.com
  */
 public abstract class NoAuthShiroConfigurationModule extends ShiroWebModule {
+    private static final Logger log = LoggerFactory.getLogger(NoAuthShiroConfigurationModule.class);
 
     private final String HASH_ALGORITHM = "SHA-256";
     private final int HASH_ITERATIONS = 1000;
@@ -37,7 +40,10 @@ public abstract class NoAuthShiroConfigurationModule extends ShiroWebModule {
     }
 
     protected void configureShiroWeb() {
-        System.out.println("NoAuthShiroConfigurationModule.configureShiroWeb invoked.");
+        log.debug("configureShiroWeb invoked.");
+        // Bind and expose an authorization cache manager
+        bind(CacheManager.class).to(MemoryConstrainedCacheManager.class);
+        expose(CacheManager.class);
 
         // Bind the Realms
         bindRealm().to(NoAuthRealm.class);
@@ -49,6 +55,8 @@ public abstract class NoAuthShiroConfigurationModule extends ShiroWebModule {
         // Configure Shiro filter chains to support injection of security
         configureFilterChains();
     }
+
+
 
     protected abstract void configureFilterChains();
 }

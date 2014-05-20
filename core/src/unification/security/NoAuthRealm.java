@@ -31,6 +31,11 @@ public class NoAuthRealm extends SimpleAccountRealm {
      *
      */
     public NoAuthRealm() {
+        super();
+        addRole("administrator");
+        addRole("developer");
+        addAccount("administrator","unification", "administrator");
+        addAccount("developer","unification", "developer");
     }
 
     /**
@@ -38,6 +43,8 @@ public class NoAuthRealm extends SimpleAccountRealm {
      */
     public NoAuthRealm(String name) {
         super(name);
+        addRole("administrator");
+        addRole("developer");
     }
 
     /* (non-Javadoc)
@@ -53,14 +60,16 @@ public class NoAuthRealm extends SimpleAccountRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        AuthenticationInfo info = new SimpleAccount(token.getPrincipal(), token.getCredentials(), "javaunification.org");
-        System.out.println("NoAuthRealm: User " + info.getPrincipals().getPrimaryPrincipal() + " has been authenticated.");
-        return info;
+        //AuthenticationInfo info = new SimpleAccount(token.getPrincipal(), token.getCredentials(), "javaunification.org");
+        //System.out.println("NoAuthRealm: User " + info.getPrincipals().getPrimaryPrincipal() + " has been authenticated.");
+        //return info;
+        return super.doGetAuthenticationInfo(token);
     }
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        AuthorizationInfo info = new SimpleAuthorizationInfo(toSet("developer", ","));
-        return info;
+        //AuthorizationInfo info = new SimpleAuthorizationInfo(toSet("developer", ","));
+        //return info;
+        return super.doGetAuthorizationInfo(principals);
     }
 }
